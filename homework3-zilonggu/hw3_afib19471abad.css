@@ -1,0 +1,103 @@
+body {
+    text-align: center;
+    font-family: Georgia;
+}
+
+#margin {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+#head {
+    border-style: solid;
+    border-width: 1px;
+    margin: auto;
+    height: 130px;
+    width: 666px;
+}
+
+#head_padding{
+    padding: 49px;
+    margin-bottom: 10px;
+}
+
+h1{
+    font-size: 52px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    font-weight: 100;
+}
+
+#anchors{
+    margin: auto;
+
+    font-size: 14px;
+    font-style: italic;
+    color: gray;
+}
+
+.anchor{
+    margin-left: 14px;
+}
+
+a{
+    color: gray;
+    text-decoration: none;
+}
+
+#pics{
+    margin: auto;
+    width: 766px;
+    height:796px;
+}
+
+.note{
+    font-size: 24px;
+    margin: 3px;
+    text-align: left;
+}
+
+.pic{
+    height: 375px;
+    width: 375px;
+    margin: 4px;
+    float: left;
+    overflow: hidden;
+}
+
+.pic:hover{
+    background-color: black;
+}
+
+.picture{
+    height: 375px;
+    width: 375px;
+    object-fit: cover;
+}
+
+.picture:hover{
+    opacity: 0.6;
+}
+
+#foot_padding{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#foot{
+    height: 130px;
+    width: 666px;
+    margin: auto;
+    margin-top: 28px;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.share_pic{
+    height: 20px;
+    width: 20px;
+    margin: 8px;
+    margin-top: 12px;
+}

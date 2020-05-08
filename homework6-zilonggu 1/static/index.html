@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+</head>
+<body onload="load_all()">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
+
+    <script type="text/javascript" src="/static/index.js"></script>
+    <div id='sidebar'>
+        <div id='google_new' class='bar1' onclick='change_page(0)'>
+            Google News
+        </div>
+        <div id='search' class='bar2' onclick='change_page(1)'>
+            Search
+        </div>
+    </div>
+
+    <div class='main' id='headline_page'>
+        <div id='slider'>
+            <a id='slider_a' href="" target="_blank">
+                <img class='slider_img' id='slider_img' src=''>
+                <div class='slider_text' id='slider_text'>
+                    <h3></h3>
+                    <p></p>
+                </div>
+            </a>
+        </div>
+
+        <div id='my_dataviz'></div>
+
+        <div id='cnn'>
+            <h2>CNN</h2>
+            <hr>
+            <div class='container', id='cnn_container'>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='cnn0' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='cnn1' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='cnn2' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='cnn3' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id='fox'>
+            <h2>Fox News</h2>
+            <hr>
+            <div class='container', id='fox_container'>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='fox0' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='fox1' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='fox2' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+                <div class='news'>
+                    <a href="" target="_blank">
+                        <img class='news_img' id='fox3' src=''>
+                        <p class='news_title'></p>
+                        <p class='news_des'></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class='main' id='search_page'>
+        <div class='form_div'>
+            <form autocomplete="on" id='search_form' target='rfFrame' action="about:blank">
+                Keyword <span style='color:red'>* </span> <input type="text" name="keyword" required>
+                From <span style='color:red'>* </span><input type="date" name='from' required>
+                To <span style='color:red'>* </span><input type="date" name='to' required>
+                <br>
+                Category <select name="category" onchange="get_source()">
+                    <option value="all">All</option>
+                    <option value="business">Business</option>
+                    <option value="entertainment">Entertainment</option>
+                    <option value="general">General</option>
+                    <option value="health">Health</option>
+                    <option value="science">Science</option>
+                    <option value="sports">Sports</option>
+                    <option value="technology">Technology</option>
+                    </select>
+                Source <select name="source" id="source_opt">
+                    <option value="all">All</option>
+                    </select>
+                <br>
+                <input type="button" value="Search" onclick="search()" autocomplete="on">
+                <input type="button" value="Clear" onclick="clear_button()">
+                <input type="submit" name='hidden_submit' style="display:none;">
+            </form>
+        </div>
+
+        <iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
+
+        <div id='cards_div'>
+            <div id='news_cards'>
+
+            </div>
+            <button id="show" onclick="show_more_or_less(this)">Show More</button>
+        </div>
+
+        <div class='card' id='sample' onclick="show_detail(this)" _state='0'>
+            <div class='card_img_div'>
+                <img class='card_img' src=''>
+            </div>
+            <div class='card_content'>
+                <h4>Title</h4>
+                <p>Author:</p>
+                <p>Source:</p>
+                <p>Date:</p>
+                <p>Description</p>
+                <p>Description</p>
+                <a href='' target='_blank'>Original Post</a>
+            </div>
+            <div class='x' onclick="hide_detail(this)">
+                &times
+            </div>
+        </div>
+    </div>
+    <div id='bottom_margin'></div>
+</body>
+</html>

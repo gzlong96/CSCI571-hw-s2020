@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <title>Homework 4</title>
+    
+    <script LANGUAGE=JavaScript> 
+    function viewJSON(what){ 
+        var URL = what.URL.value;  
+        function loadJSON(url){ 
+            xmlhttp = new XMLHttpRequest(); 
+            xmlhttp.open("GET",url,false); // "synchronous” (deprecated because it freezes the page while waiting for a response) * 
+            try {
+                xmlhttp.send(); 
+            } catch (error) {
+                alert("JSON not found!");
+                return null
+            }
+            jsonObj = JSON.parse(xmlhttp.responseText); 
+            return jsonObj;   
+            // TODO handle no file etc
+        }
+        jsonObj = loadJSON(URL); 
+        if (jsonObj != null){
+            jsonObj.onload = generateHTML(jsonObj); 
+            if (html_text != null){
+                hWin = window.open("", "Assignment4", "height=800,width=1200"); 
+                hWin.document.write(html_text); 
+            hWin.document.close(); 
+            }
+            else{
+                alert("No building in JSON!");
+            }
+             
+        }
+    }
+        
+    function generateHTML(jsonObj){ 
+        if (jsonObj.Mainline.Table.Row==undefined || jsonObj.Mainline.Table.Row.length==0){
+            html_text = null;
+            return
+        }
+        root = jsonObj.DocumentElement; 
+        html_text = "<!DOCTYPE html>"
+        html_text += "<html><head><title>JSON Parse Result</title></head><body>"; 
+        html_text += "<table border='2'>"; 
+        // caption = jsonObj.catalog.title; 
+        // html_text += "<caption align='left'><h1>"+caption+"</h1></caption>"; 
+        buldings = jsonObj.Mainline.Table.Row; // an array of planes 
+        header_keys = jsonObj.Mainline.Table.Header.Data; 
+        html_text += "<tbody>"; 
+        html_text += "<tr>"; 
+        // x = 150;  
+        // y = 150; 
+        // output the headers 
+        // var header_keys = Object.keys(planeNodeList); 
+        for (i = 0; i < header_keys.length; i++){ 
+            header = header_keys[i]; 
+            // if (header == "Rank"){  
+            //     header = "Family";  
+            //     x = 120;  
+            //     y = 55;  
+            // } 
+            // if (header == "Boeing"){  
+            //     header = "Family";  
+            //     x = 100;  
+            //     y = 67;  
+            // } 
+            // if (header == "seats")    header = "Seats"; 
+            // if (header == "Wingspan")   header = "Wing Span"; 
+            // if (header == "height")  header = "Height"; 
+            html_text += "<th>" + header + "</th>";    
+        } 
+        html_text += "</tr>"; // output out the values 
+        for (i = 0; i < buldings.length; i++) //do for all planes (one per row) 
+        {                 
+            buildingNodeList = buldings[i]; //get properties of a plane (an object) 
+            html_text += "<tr>";      //start a new row of the output table 
+            var building_keys = Object.keys(buildingNodeList); 
+            for (j = 0; j < building_keys.length; j++){ 
+                prop = building_keys[j]; 
+                if (prop == "Rank" || prop == "Name"){
+                    html_text += "<td>" + buildingNodeList[prop] + "</td>"; 
+                } 
+                if (prop == "Height"){
+                    html_text += "<td>" + buildingNodeList["Height"] + "</td>"; 
+                } 
+                if (prop == "Logo"){
+                    html_text += "<td><img src='" + buildingNodeList["Logo"] + "' style='vertical-align: middle; width:180px; height:180px; display:block;'></td>"; 
+                } 
+                if (prop == "Hubs"){
+                    location_list = buildingNodeList.Hubs.Hub
+                    html_text += "<td><ul type='disc'>"
+                    for (k=0; k < location_list.length; k++){
+                        if (k==0) html_text += "<li style='font-weight: bold'>" + location_list[k] + "</li>";
+                        else html_text += "<li>" + location_list[k] + "</li>"
+                        
+                    }
+                    html_text += "</ul></td>"
+                }
+                if (prop == "HomePage"){
+                    html_text += "<td><a href='" + buildingNodeList["HomePage"] + "'>" + buildingNodeList["HomePage"] + "</a></td>";
+                }
+            } 
+            html_text+="</tr>";            
+        }                            
+        html_text += "</tbody>"; 
+        html_text += "</table>";           
+        html_text += "</bo"+ "<dy> </html>";  
+    }
+    </script>
+
+    <body style="text-align: center;">
+        <p style="font-weight: bold; margin-top:110px">Enter URL for list of tallest buildings JSON File</p>
+        <form name="myform" method="POST" id="location"> 
+            <input type="text" name="URL" maxlength="255" size="100" value="buildinglist.json" style="width: 150px;"/> 
+            <br /> 
+            <input type="button" name="submit" value="Submit Query" onClick="viewJSON(this.form)" style="margin-top: 24px;"/> 
+        </form>
+    </body>
+</html>
